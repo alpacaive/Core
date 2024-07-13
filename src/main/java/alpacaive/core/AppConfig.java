@@ -1,5 +1,6 @@
 package alpacaive.core;
 
+import alpacaive.core.discount.DiscountPolicy;
 import alpacaive.core.discount.FixDiscountFolicy;
 import alpacaive.core.member.MemberRepository;
 import alpacaive.core.member.MemberService;
@@ -13,12 +14,21 @@ public class AppConfig {
     // 생성한 객체 인스턴의 참조(래퍼런스)를 생성자를 통해 주입(연결)해준다
     // 객체의 생성과 연결은 AppConfig 가 담당
 
+    private static MemoryMemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
+
+    public DiscountPolicy discountPolicy() {
+        return new FixDiscountFolicy();
+    }
+
     // 생성자 주입
     public MemberService memberService() {
-        return new MemberServiceImpl(new MemoryMemberRepository());
+        return new MemberServiceImpl(memberRepository());
     } // MemberServiceImpl 에는 MemoryMemberRepository 주입
 
     public OrderService orderService() {
-        return new OrderServiceImpl(new MemoryMemberRepository(), new FixDiscountFolicy());
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
     } // OrderSErviceImpl 에는 MemoryMemberRepository, FixDiscountFolicy 주입
+
 }
