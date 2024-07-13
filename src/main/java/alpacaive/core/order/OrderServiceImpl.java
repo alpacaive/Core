@@ -1,15 +1,20 @@
 package alpacaive.core.order;
 
 import alpacaive.core.discount.DiscountPolicy;
-import alpacaive.core.discount.FixDiscountFolicy;
 import alpacaive.core.member.Member;
 import alpacaive.core.member.MemberRepository;
 import alpacaive.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService {
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountFolicy();
+    // DIP 지킴: 구체화에 의존하지 않고 추상화에만 의존
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
