@@ -2,6 +2,7 @@ package alpacaive.core;
 
 import alpacaive.core.discount.DiscountPolicy;
 import alpacaive.core.discount.FixDiscountFolicy;
+import alpacaive.core.discount.RateDiscountPolicy;
 import alpacaive.core.member.MemberRepository;
 import alpacaive.core.member.MemberService;
 import alpacaive.core.member.MemberServiceImpl;
@@ -19,7 +20,9 @@ public class AppConfig {
     }
 
     public DiscountPolicy discountPolicy() {
-        return new FixDiscountFolicy();
+//        return new FixDiscountFolicy();
+        return new RateDiscountPolicy(); // 할인 정책 변경
+        // -> AppConfig의 등장으로 구성영역과 사용영역이 완전히 분리되었기 때문에 구성영역에서 할인 정책을 변경하면 끝
     }
 
     // 생성자 주입
