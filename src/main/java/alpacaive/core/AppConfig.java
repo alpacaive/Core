@@ -32,7 +32,7 @@ public class AppConfig {
     // call AppConfig.memberService
     // call AppConfig.memberRepository
     // call AppConfig.orderService
-
+    // -> 모든 비밀은 @Configuration 을 적용한 AppConfig에 있다
 
     // 생성자 주입
     @Bean
