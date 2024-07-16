@@ -18,10 +18,40 @@ public class AppConfig {
     // 생성한 객체 인스턴의 참조(래퍼런스)를 생성자를 통해 주입(연결)해준다
     // 객체의 생성과 연결은 AppConfig 가 담당
 
+
+    // @Bean memberService -> new MemoryMemberRepository()
+    // @Bean orderService -> new MemoryMemberRepository()
+    // 이렇게 하면 싱글톤이 깨질까? => ConfigurationSingletonTest 에 테스트 작성하면서 보기
+    // <예상값>
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+    // call AppConfig.memberRepository
+    // <실제값>
+    // call AppConfig.memberService
+    // call AppConfig.memberRepository
+    // call AppConfig.orderService
+
+
+    // 생성자 주입
+    @Bean
+    public MemberService memberService() {
+        System.out.println("call AppConfig.memberService");
+        return new MemberServiceImpl(memberRepository());
+    } // MemberServiceImpl 에는 MemoryMemberRepository 주입
+
     @Bean
     public MemoryMemberRepository memberRepository() {
+        System.out.println("call AppConfig.memberRepository");
         return new MemoryMemberRepository();
     }
+
+    @Bean
+    public OrderService orderService() {
+        System.out.println("call AppConfig.orderService");
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    } // OrderSErviceImpl 에는 MemoryMemberRepository, FixDiscountFolicy 주입
 
     @Bean
     public DiscountPolicy discountPolicy() {
@@ -29,16 +59,5 @@ public class AppConfig {
         return new RateDiscountPolicy(); // 할인 정책 변경
         // -> AppConfig의 등장으로 구성영역과 사용영역이 완전히 분리되었기 때문에 구성영역에서 할인 정책을 변경하면 끝
     }
-
-    // 생성자 주입
-    @Bean
-    public MemberService memberService() {
-        return new MemberServiceImpl(memberRepository());
-    } // MemberServiceImpl 에는 MemoryMemberRepository 주입
-
-    @Bean
-    public OrderService orderService() {
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
-    } // OrderSErviceImpl 에는 MemoryMemberRepository, FixDiscountFolicy 주입
 
 }
