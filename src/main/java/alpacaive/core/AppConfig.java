@@ -50,7 +50,8 @@ public class AppConfig {
     @Bean
     public OrderService orderService() {
         System.out.println("call AppConfig.orderService");
-        return new OrderServiceImpl(memberRepository(), discountPolicy());
+//        return new OrderServiceImpl(memberRepository(), discountPolicy());
+        return null;
     } // OrderSErviceImpl 에는 MemoryMemberRepository, FixDiscountFolicy 주입
 
     @Bean
