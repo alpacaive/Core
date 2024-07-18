@@ -1,7 +1,6 @@
 package alpacaive.core;
 
 import alpacaive.core.discount.DiscountPolicy;
-import alpacaive.core.discount.FixDiscountFolicy;
 import alpacaive.core.discount.RateDiscountPolicy;
 import alpacaive.core.member.MemberRepository;
 import alpacaive.core.member.MemberService;

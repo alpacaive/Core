@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 //@Qualifier("fixDiscountPolicy")
-public class FixDiscountFolicy implements DiscountPolicy{
+public class FixDiscountPolicy implements DiscountPolicy{
 
     private int discountFixAmount = 1000; // 1000원 할인
 

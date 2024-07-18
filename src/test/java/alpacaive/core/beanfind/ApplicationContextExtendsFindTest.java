@@ -2,7 +2,7 @@ package alpacaive.core.beanfind;
 
 import alpacaive.core.AppConfig;
 import alpacaive.core.discount.DiscountPolicy;
-import alpacaive.core.discount.FixDiscountFolicy;
+import alpacaive.core.discount.FixDiscountPolicy;
 import alpacaive.core.discount.RateDiscountPolicy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -71,7 +71,7 @@ public class ApplicationContextExtendsFindTest {
 
         @Bean
         public DiscountPolicy fixDiscountPolicy() {
-            return new FixDiscountFolicy();
+            return new FixDiscountPolicy();
         }
     }
 }

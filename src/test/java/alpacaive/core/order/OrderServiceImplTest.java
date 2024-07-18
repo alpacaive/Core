@@ -1,6 +1,6 @@
 package alpacaive.core.order;
 
-import alpacaive.core.discount.FixDiscountFolicy;
+import alpacaive.core.discount.FixDiscountPolicy;
 import alpacaive.core.member.Grade;
 import alpacaive.core.member.Member;
 import alpacaive.core.member.MemberRepository;
@@ -19,7 +19,7 @@ class OrderServiceImplTest {
         MemoryMemberRepository memberRepository = new MemoryMemberRepository();
         memberRepository.save(new Member(1L, "name", Grade.VIP));
 
-        OrderServiceImpl orderService = new OrderServiceImpl(memberRepository, new FixDiscountFolicy());
+        OrderServiceImpl orderService = new OrderServiceImpl(memberRepository, new FixDiscountPolicy());
         Order order = orderService.createOrder(1L, "itemA", 10000);
         assertThat(order.getDiscountPrice()).isEqualTo(1000);
     }
