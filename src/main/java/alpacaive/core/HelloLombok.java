@@ -14,7 +14,7 @@ public class HelloLombok {
 
     public static void main(String[] args) {
         HelloLombok helloLombok = new HelloLombok();
-        helloLombok.setName("asdfasdf");
+        helloLombok.setName("gangang");
 
         String name = helloLombok.getName();
         System.out.println("name = " + name);

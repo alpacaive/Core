@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@RequiredArgsConstructor // 필수값인 파이널이 붙은 필드를 이용해 생성자를 만들어
+//@RequiredArgsConstructor // 필수값인 파이널이 붙은 필드를 이용해 생성자를 만들어
 public class OrderServiceImpl implements OrderService {
 
     // DIP 지킴: 구체화에 의존하지 않고 추상화에만 의존
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
@@ -24,8 +29,8 @@ public class OrderServiceImpl implements OrderService {
         return new Order(memberId, itemName, itemPrice, discountPrice);
     }
 
-    // 테스트 용도
+    // 테스트용도
     public MemberRepository getMemberRepository() {
-        return memberRepository;
+        return this.memberRepository;
     }
 }
