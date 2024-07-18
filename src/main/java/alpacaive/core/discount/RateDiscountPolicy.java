@@ -1,5 +1,6 @@
 package alpacaive.core.discount;
 
+import alpacaive.core.annotation.MainDiscountPolicy;
 import alpacaive.core.member.Grade;
 import alpacaive.core.member.Member;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 //@Qualifier("mainDiscountPolicy")
-@Primary
+//@Primary
+@MainDiscountPolicy
 public class RateDiscountPolicy implements DiscountPolicy {
 
     private int discountPercent = 10;

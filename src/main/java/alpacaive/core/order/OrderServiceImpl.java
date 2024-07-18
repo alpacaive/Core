@@ -1,5 +1,6 @@
 package alpacaive.core.order;
 
+import alpacaive.core.annotation.MainDiscountPolicy;
 import alpacaive.core.discount.DiscountPolicy;
 import alpacaive.core.member.Member;
 import alpacaive.core.member.MemberRepository;
@@ -17,7 +18,9 @@ public class OrderServiceImpl implements OrderService {
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    @Autowired
+    public OrderServiceImpl(MemberRepository memberRepository,
+                            @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }
